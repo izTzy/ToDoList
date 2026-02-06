@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="app" role="application" aria-label="To-Do List Application">
+    <header class="app__header">
+      <div class="title">
+        <h1>Tugas To Do List</h1>
+      </div>
+
+      <div class="chips" role="tablist" aria-label="Filter">
+        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="active" role="tab" aria-selected="false">Active</button>
+        <button class="chip" data-filter="done" role="tab" aria-selected="false">Done</button>
+      </div>
+    </header>
+
+    <section class="composer" aria-label="Add task">
+      <form id="taskForm" class="composer__form" autocomplete="off">
+        <div class="field">
+          <label class="sr-only" for="taskInput">Task</label>
+          <input id="taskInput" name="task" type="text" placeholder="Add a task…" maxlength="120" required />
+        </div>
+
+        <div class="field field--inline">
+          <label class="sr-only" for="dueInput">Due date</label>
+          <input id="dueInput" name="due" type="date" />
+          <div class="select">
+            <label class="sr-only" for="priorityInput">Priority</label>
+          </div>
+        </div>
+
+        <button class="btn btn--primary" type="submit">
+          <span class="btn__icon" aria-hidden="true">+</span>
+          <span>Add</span>
+        </button>
+      </form>
+
+      <div class="meta">
+        <div class="counter" aria-live="polite">
+          <span id="countActive">0</span> active • <span id="countDone">0</span> done
+        </div>
+        <div class="actions">
+          <button id="clearDoneBtn" class="btn btn--ghost" type="button">Clear done</button>
+          <button id="clearAllBtn" class="btn btn--ghost danger" type="button">Clear all</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="list" aria-label="Tasks">
+      <ul id="taskList" class="tasklist" role="list"></ul>
+
+      <div id="emptyState" class="empty" hidden>
+        <div class="empty__icon" aria-hidden="true">📝</div>
+        <h2>No tasks yet</h2>
+        <p>Add something</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+  <template id="taskItemTpl">
+    <li class="task" data-id="">
+      <button class="check" type="button" aria-label="Mark as done">
+        <span class="check__ring"></span>
+        <span class="check__tick" aria-hidden="true">✓</span>
+      </button>
+
+      <div class="task__body">
+        <div class="task__top">
+          <div class="task__text" tabindex="0"></div>
+          <span class="pill" data-pill=""></span>
+        </div>
+        <div class="task__sub">
+          <span class="due" data-due=""></span>
+        </div>
+      </div>
+
+      <div class="task__actions">
+        <button class="iconbtn" data-action="edit" type="button" aria-label="Edit">✎</button>
+        <button class="iconbtn" data-action="delete" type="button" aria-label="Delete">🗑</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
